@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+
+<div class="media">
+  <div class="media-left">
+    <img class="media-object" src="{{ product.image_url|default_if_none:'#' }}" alt="Nothing" width="430" height="320">
+  </div>
+  <div class="media-body">
+    <br>
+    <h4 class="media-heading">{{ product.name}}</h4>
+    <h5>Price : {{ product.price }} Tk</h5><br>
+    
+    <div class="form-group col-md-4">
+	    <form method="POST">
+	    	{% csrf_token %}
+	    	{{cart_product_form|crispy}}
+	    	<input class="btn btn-primary" type="submit" value="Add">
+	    </form>
+	</div>
+  </div>
+
+{% endblock %}

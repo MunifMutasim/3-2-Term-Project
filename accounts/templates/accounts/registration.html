@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+
+<div class="jumbotron">
+	{% if registered %}
+		<h1>Thank you for registering</h1>
+
+	{% else %}
+		<h2>Tell us about yourself...</h2>
+		<font color="red">Fields with an asterisk(*) are mandatory.</font><br><br>
+
+		<div class="row">
+  			<div class="col-md-5">
+  				
+  				<form method="POST">
+					{% csrf_token %}
+					{{user_form|crispy}}
+					{{profile_form|crispy}}
+					<input class="btn btn-primary" type="submit" value="Register">
+				</form>
+
+  			</div>
+  		</div>
+	{% endif %}
+</div>
+{% endblock %}

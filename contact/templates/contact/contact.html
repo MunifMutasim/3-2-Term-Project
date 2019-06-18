@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+
+<div class="container">
+	<h2>Contact Us</h2>
+	<h4>
+	  <small class="text-muted">
+	    Toolsbd<br>
+	    ECA Bhaban, 39, Kazi Nazrul Islam Avenue<br>
+	    Karwan Bazar, Dhaka-1215<br>
+	    Bangladesh
+	  </small>
+	</h4><br>
+
+	<p style="display:inline">
+		<p class="text-info" style="display:inline">We do not take phone or email orders.</p> Please feel free to order online at any time! For problems with an order or shipment please email : <mark>sdprojectl3t2@gmail.com</mark>
+	</p>
+
+	<p style="display:inline">
+		If you have an urgent inquiry you may also contact us directly at: <p class="text-info" style="display:inline">+8801841110110 </p>(No phone orders please!)
+	</p>
+
+	<p style="display:inline">
+		Product Photos: techshopbd product photos may be used without permission for educational purposes (research papers, school projects, etc.). However, permission must be granted for commercial use and proper credit to techshopbd must be given.
+	</p><br><br><br>
+
+
+	<div class="jumbotron">
+		<h3 style="color:red;">Submit your message</h3>
+		<div class="row">
+			<div class="col-md-5">
+				{% if messages %}
+					<div class="row">
+						<div class="col-xs-12">
+							{% for message in messages %}
+								<h5{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color:blue">{{ message }}</h5>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+				<form method="POST">
+					{% csrf_token %}
+					{{form|crispy}}
+					<input class="btn btn-primary" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+
+{% endblock %}

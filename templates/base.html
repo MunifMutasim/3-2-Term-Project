@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>HOME</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  /*.carousel-inner img {
+      width: 100;  Set width to 100% 
+      margin: auto;
+      min-height:200px;
+  }*/
+
+  .carousel-inner > .item > img {
+      width:1400px;
+      height:600px;
+  }
+
+
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Logo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'contact:contact' %}">Contact Us</a></li>
+          <li><a href="{% url 'shop:product_list' %}">Catalogue</a></li>
+          <li><a href="{% url 'cart:show_cart_detail' %}">Shopping Cart</a></li>
+        </ul>
+
+
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Your toolsbd.com
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <!-- <li><a href="#">request.user.username</a></li> -->
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+              </ul>
+            </div>
+          {% else %}
+            <li><a href="{% url 'accounts:user_login' %}"><span class="glyphicon glyphicon-log-in"></span> Your toolsbd.com</a></li>
+
+          {% endif %}
+        </ul>
+      
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block body_block %}
+    {% endblock %}
+  </div>
+</body>

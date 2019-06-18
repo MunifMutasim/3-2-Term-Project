@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h3>Categories</h3>
+      <ul class="nav nav-pills nav-stacked">
+		{% for c in categories %}
+			<li><a href="{{ c.get_absolute_url }}"><h5>{{ c.name }}</h5></a></li>
+	    {% endfor %}
+
+        
+      </ul><br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-sm-9">
+		  {% if not category %}
+        <h3><small>All Products</small></h3>
+        <hr>
+      {% else %}
+        <h3><small>Products</small></h3>
+        <h3><small>Category : {{ category.name }}</small></h3>
+        <hr>
+      {% endif %}
+      
+      <div class="row">
+        <!-- <div class="col-sm-3"> -->
+          <!-- {% for product in products %}
+            <div class="well">
+              <img src="{{ product.image_url|default_if_none:'#' }}" alt="Nothing" width="400" height="300">
+              <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+              Price : {{ product.price }} Tk<br>
+            </div>
+          {% endfor %} -->
+
+        <!-- </div> -->
+
+        <div class="card" style="width: 60rem;">
+          {% for product in products %}
+            <img class="card-img-top" src="{{ product.image_url|default_if_none:'#' }}" alt="Nothing" width="430" height="320">
+            <div class="card-block">
+              <!-- <h4 class="card-title"></h4> -->
+              <h4><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
+              <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+              <h5>Price : {{ product.price }} Tk</h5>
+              Details:{{ product.description}}<br><br>
+              <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Add to cart</a>
+            </div><br><br><br><hr>
+          {% endfor %}
+        </div>
+
+      </div>
+	  </div>
+
+  </div>
+</div>
+
+
+{% endblock %}

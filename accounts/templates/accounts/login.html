@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body_block %}
+ <div class="container">
+     <div class="col-lg-4"></div>
+     <div class="col-lg-4">
+         
+         <div class="jumbotron" style="margin-top: 150px">
+             
+             <h3>Please Sign In</h3><br>
+             <form action="{% url 'accounts:user_login' %}" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="inputUsernameEmail">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+
+                <button type="submit" class="btn btn-primary form-control">Sign in</button>
+            
+            </form>
+            <h5>New to toolsbd?<a href="{% url 'accounts:register' %}">Register Here</a></h5>
+
+         
+         </div>
+
+     </div>
+     <div class="col-lg-4"></div>
+ </div>
+ {% endblock %}
